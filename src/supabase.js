@@ -1,7 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-
-const url = import.meta.env.NEXT_PUBLIC_SUPABASE_URL
-const key = import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-export const supabase = url && key ? createClient(url, key) : null
-export const hasSupabase = Boolean(supabase)
+const url=import.meta.env.NEXT_PUBLIC_SUPABASE_URL
+const key=import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+export const supabase=url&&key?createClient(url,key):null
+export const hasSupabase=Boolean(supabase)
