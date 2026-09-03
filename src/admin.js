@@ -9,9 +9,18 @@ const defaultContent=[
  {seccion:'location_text',texto:'Playa Brava · Parada 30\nPunta del Este, Uruguay'},
  {seccion:'contact_instagram',texto:'@amexbeachclub'},
  {seccion:'contact_phone',texto:'+598 94 123 456'},
- {seccion:'contact_email',texto:'info@amexbeachclub.com'}
+ {seccion:'contact_email',texto:'info@amexbeachclub.com'},
+ {seccion:'gastro_title',texto:'Sabores que completan la experiencia'},
+ {seccion:'gastro_text',texto:'Restaurante, bar y sushi con una propuesta pensada para acompañar cada momento frente al mar.'},
+ {seccion:'reserve_title',texto:'RESERVÁ TU EXPERIENCIA'},
+ {seccion:'reserve_text',texto:'Reservá tu lugar en la playa, tu mesa o tu bungalow y disfrutá Parada 30.'},
+ {seccion:'feature_1_title',texto:'SOMBRILLAS'}, {seccion:'feature_1_text',texto:'Equipadas para tu máximo confort.'},
+ {seccion:'feature_2_title',texto:'CAMASTROS'}, {seccion:'feature_2_text',texto:'Relajate frente al mar con el mejor servicio.'},
+ {seccion:'feature_3_title',texto:'BUNGALOWS'}, {seccion:'feature_3_text',texto:'Espacios privados para disfrutar en grupo.'},
+ {seccion:'feature_4_title',texto:'SERVICIO DE PLAYA'}, {seccion:'feature_4_text',texto:'Gastronomía y tragos sin moverte de tu lugar.'},
+ {seccion:'feature_5_title',texto:'DUCHAS'}, {seccion:'feature_5_text',texto:'Comodidad y bienestar todo el día.'}
 ]
-const photoKeys=[['hero_image','Foto principal de portada','image'],['hero_video','Video de portada (si está cargado, reemplaza la foto)','video'],['intro_image','Foto de El Beach Club','image'],...Array.from({length:6},(_,i)=>[`gallery_${i+1}`,`Galería ${i+1}`,'image'])]
+const photoKeys=[['hero_image','Foto principal de portada','image'],['hero_video','Video de portada (si está cargado, reemplaza la foto)','video'],['intro_image','Foto de El Beach Club','image'],['gastro_restaurant_image','Foto de Restaurante','image'],['gastro_bar_image','Foto de Bar','image'],['gastro_sushi_image','Foto de Sushi','image'],...Array.from({length:6},(_,i)=>[`gallery_${i+1}`,`Galería ${i+1}`,'image'])]
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 function shell(body){app.innerHTML=`<div class="admin-shell"><aside><div class="brand">AMEX<br><span>BEACH CLUB</span><small>PARADA 30</small></div><a href="/">← Ver web</a><button data-tab="contenido">Contenido</button><button data-tab="fotos">Fotos</button><button data-tab="menu">Menú</button><button data-tab="actividades">Actividades</button><button data-tab="reservas">Reservas</button><button id="logout">Cerrar sesión</button></aside><main><div class="top"><div><small>ADMINISTRACIÓN</small><h1>AMEX Beach Club</h1></div><span id="status"></span></div><div id="panel">${body}</div></main></div>`;document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>loadTab(b.dataset.tab));document.querySelector('#logout').onclick=async()=>{await supabase.auth.signOut();location.reload()}}
 async function login(){app.innerHTML=`<div class="login"><div class="login-card"><div class="brand">AMEX<br><span>BEACH CLUB</span><small>PARADA 30</small></div><h1>Panel de administración</h1><p>Ingresá con el usuario administrador de Supabase.</p><form id="login"><input name="email" type="email" placeholder="Email" required><input name="password" type="password" placeholder="Contraseña" required><button>Ingresar</button><div id="err"></div></form></div></div>`;document.querySelector('#login').onsubmit=async e=>{e.preventDefault();const f=new FormData(e.target);const {error}=await supabase.auth.signInWithPassword({email:f.get('email'),password:f.get('password')});if(error)document.querySelector('#err').textContent=error.message;else location.reload()}}
