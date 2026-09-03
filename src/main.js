@@ -25,7 +25,7 @@ async function getRows(table){
   if(error){console.warn(table,error.message);return []}
   return data||[]
 }
-function contentMap(rows){const c={...fallback};for(const r of rows){if(r.seccion)c[r.seccion]=r.texto||r.titulo||''}return c}
+function contentMap(rows){const c={...fallback};for(const r of rows){if(r.seccion)c[r.seccion]=r.texto||r.imagen||r.titulo||''}return c}
 async function submitReservation(form){
  const fd=new FormData(form); const row={nombre:fd.get('nombre'),telefono:fd.get('telefono'),email:fd.get('email'),fecha:fd.get('fecha')||null,hora:fd.get('hora'),personas:Number(fd.get('personas')||1),mensaje:fd.get('mensaje'),estado:'pendiente'}
  if(!supabase) throw new Error('Supabase no configurado')
