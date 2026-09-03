@@ -31,7 +31,7 @@ async function submitReservation(form){
  if(!supabase) throw new Error('Supabase no configurado')
  const {error}=await supabase.from('reservas').insert(row); if(error)throw error
 }
-function bg(url,fallbackUrl){return `background-image:linear-gradient(90deg,rgba(9,28,45,.34),rgba(9,28,45,.08)),linear-gradient(0deg,rgba(7,25,41,.18),rgba(7,25,41,.05)),url("${esc(url||fallbackUrl)}")`}
+function bg(url,fallbackUrl){const u=url||fallbackUrl;return `background-image:linear-gradient(90deg,rgba(9,28,45,.34),rgba(9,28,45,.08)),linear-gradient(0deg,rgba(7,25,41,.18),rgba(7,25,41,.05)),url("${String(u).replaceAll('\"','%22')}")`}
 function page(content,menu,activities){
  const gallery=[1,2,3,4,5,6].map((n,i)=>content[`gallery_${n}`]||fallbackGallery[i])
  const heroImage=content.hero_image||'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2200&q=85'
