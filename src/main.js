@@ -25,7 +25,7 @@ async function getRows(table){
   if(error){console.warn(table,error.message);return []}
   return data||[]
 }
-function contentMap(rows){const c={...fallback};for(const r of rows){if(!r.seccion)continue;const value=r.texto||r.imagen||r.titulo||'';c[r.seccion]=value;if(/_position$/.test(r.seccion)){c[r.seccion]=r.texto||r.titulo||'center'}}for(const r of rows){if(!r.seccion)continue;if(/_image$/.test(r.seccion)||r.seccion==='hero_image'||r.seccion==='hero_video'){const posRow=rows.find(x=>x.seccion===`${r.seccion}_position`);c[`${r.seccion}_position`]=posRow?.texto||posRow?.titulo||'center'}}return c}
+function contentMap(rows){const c={...fallback};for(const r of rows){if(!r.seccion)continue;const value=r.texto||r.imagen||r.titulo||'';c[r.seccion]=value;if(/_position$/.test(r.seccion))c[r.seccion]=r.texto||r.titulo||'center'}for(const r of rows){if(!r.seccion)continue;if(/_image$/.test(r.seccion)||r.seccion==='hero_image'||r.seccion==='hero_video'){const posRow=rows.find(x=>x.seccion===`${r.seccion}_position`);c[`${r.seccion}_position`]=r.titulo||posRow?.texto||posRow?.titulo||'center'}}return c}
 async function submitReservation(form){
  const fd=new FormData(form); const row={nombre:fd.get('nombre'),telefono:fd.get('telefono'),email:fd.get('email'),fecha:fd.get('fecha')||null,hora:fd.get('hora'),personas:Number(fd.get('personas')||1),mensaje:fd.get('mensaje'),estado:'pendiente'}
  if(!supabase) throw new Error('Supabase no configurado')
