@@ -38,8 +38,9 @@ function page(content,menu,activities){
  const introImage=content.intro_image||'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=82';const introPosition=content.intro_image_position||'center'
  const menuRows=menu.length?menu:[{nombre:'Restaurante',descripcion:'Propuesta de cocina frente al mar',precio:null},{nombre:'Bar',descripcion:'Cócteles y bebidas para disfrutar frente al mar',precio:null},{nombre:'Sushi',descripcion:'Piezas y combinados',precio:null}]
  const menuCards=menuRows.map(m=>`<article class="menu-item"><div><b>${esc(m.nombre)}</b><p>${esc(m.descripcion||'')}</p></div>${m.precio!=null?`<strong>$U ${Number(m.precio).toLocaleString('es-UY')}</strong>`:''}</article>`).join('')
- const exp=activities.length?activities:fallbackActivities
- const expHtml=exp.map(a=>`<div class="exp"><div class="icon">◈</div><h3>${esc(a.nombre||a)}</h3></div>`).join('')
+ const exp=fallbackActivities.map((name,i)=>{const row=activities.find(a=>Number(a.orden)===i+1);return row?.nombre||name})
+ const extra=activities.filter(a=>{const n=Number(a.orden);return !Number.isInteger(n)||n<1||n>fallbackActivities.length}).map(a=>a.nombre).filter(Boolean)
+ const expHtml=[...exp,...extra].map(name=>`<div class="exp"><div class="icon">◈</div><h3>${esc(name)}</h3></div>`).join('')
  const features=[1,2,3,4,5].map((n,i)=>({icon:['♧','▱','⌂','◒','⌁'][i],title:content[`feature_${n}_title`]||['SOMBRILLAS','CAMASTROS','BUNGALOWS','SERVICIO DE PLAYA','DUCHAS'][i],text:content[`feature_${n}_text`]||['Equipadas para tu máximo confort.','Relajate frente al mar con el mejor servicio.','Espacios privados para disfrutar en grupo.','Gastronomía y tragos sin moverte de tu lugar.','Comodidad y bienestar todo el día.'][i]}))
  const featuresHtml=features.map(f=>`<div class="feature"><div class="icon">${esc(f.icon)}</div><h3>${esc(f.title)}</h3><p>${esc(f.text)}</p></div>`).join('')
  document.querySelector('#app').innerHTML=`
