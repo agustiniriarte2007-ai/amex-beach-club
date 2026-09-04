@@ -21,7 +21,10 @@ const defaultContent=[
  {seccion:'feature_2_title',texto:'CAMASTROS'}, {seccion:'feature_2_text',texto:'Relajate frente al mar con el mejor servicio.'},
  {seccion:'feature_3_title',texto:'BUNGALOWS'}, {seccion:'feature_3_text',texto:'Espacios privados para disfrutar en grupo.'},
  {seccion:'feature_4_title',texto:'SERVICIO DE PLAYA'}, {seccion:'feature_4_text',texto:'Gastronomía y tragos sin moverte de tu lugar.'},
- {seccion:'feature_5_title',texto:'DUCHAS'}, {seccion:'feature_5_text',texto:'Comodidad y bienestar todo el día.'}
+ {seccion:'feature_5_title',texto:'DUCHAS'}, {seccion:'feature_5_text',texto:'Comodidad y bienestar todo el día.'},
+ {seccion:'header_brand_main',texto:'AMEX'}, {seccion:'header_brand_sub',texto:'BEACH CLUB'}, {seccion:'header_brand_parada',texto:'· PARADA 30 ·'},
+ {seccion:'nav_club',texto:'El Beach Club'}, {seccion:'nav_playa',texto:'Playa'}, {seccion:'nav_gastro',texto:'Gastronomía'}, {seccion:'nav_experiencias',texto:'Experiencias'}, {seccion:'nav_galeria',texto:'Galería'}, {seccion:'nav_ubicacion',texto:'Ubicación'}, {seccion:'nav_reservas',texto:'Reservas'},
+ {seccion:'hero_title_main',texto:'AMEX'}, {seccion:'hero_title_sub',texto:'BEACH CLUB'}, {seccion:'hero_parada',texto:'— PARADA 30 —'}, {seccion:'hero_reserve_button',texto:'Reservar'}, {seccion:'hero_menu_button',texto:'Ver carta'}
 ]
 const photoKeys=[['hero_image','Foto principal de portada','image'],['hero_video','Video de portada (si está cargado, reemplaza la foto)','video'],['intro_image','Foto de El Beach Club','image'],['gastro_restaurant_image','Foto de Restaurante','image'],['gastro_bar_image','Foto de Bar','image'],['gastro_sushi_image','Foto de Sushi','image'],...Array.from({length:6},(_,i)=>[`gallery_${i+1}`,`Galería ${i+1}`,'image'])]
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
